@@ -5,7 +5,7 @@
 }
 
 .experience h2 {
-    color: #2c3e50;
+    color: #e2e8f0;
     margin-bottom: 2rem;
     text-align: center;
 }
@@ -17,25 +17,25 @@
 }
 
 .experience-item {
-    background-color: white;
+    background-color: #2d3748;
     padding: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .experience-item h3 {
-    color: #2c3e50;
+    color: #e2e8f0;
     margin-bottom: 0.5rem;
 }
 
 .company {
-    color: #3498db;
+    color: #63b3ed;
     font-weight: bold;
     margin-bottom: 0.25rem;
 }
 
 .period {
-    color: #7f8c8d;
+    color: #a0aec0;
     font-style: italic;
     margin-bottom: 1rem;
 }
@@ -47,5 +47,5 @@
 
 .experience-item li {
     margin-bottom: 0.5rem;
-    color: #34495e;
+    color: #a0aec0;
 }

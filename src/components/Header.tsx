@@ -1,16 +1,20 @@
 import React from 'react';
 import './Header.css';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+    title: string;
+    isHomePage?: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({ title, isHomePage = false }) => {
     return (
-        <header className="header">
+        <header className={`header ${isHomePage ? 'header-full' : 'header-compact'}`}>
             <div className="header-content">
-                <h1>John Doe</h1>
+                <h1>{title}</h1>
                 <h2>Software Engineer</h2>
                 <div className="contact-info">
-                    <p>📧 john.doe@email.com</p>
-                    <p>📱 (123) 456-7890</p>
-                    <p>📍 San Francisco, CA</p>
+                    <p>📧 Jeff.Darby@Genesys.com</p>
+                    <p>📍 Hobart Tasmania</p>
                 </div>
             </div>
         </header>
