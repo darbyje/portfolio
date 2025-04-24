@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Menu.css';
 
-interface MenuProps {
-    onNavigate: (page: string) => void;
-}
+interface MenuProps { }
 
-const Menu: React.FC<MenuProps> = ({ onNavigate }) => {
+const Menu: React.FC<MenuProps> = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const handleClick = (page: string) => {
+    const handleClose = () => {
         setIsOpen(false);
-        onNavigate(page);
     };
 
     return (
@@ -23,9 +21,9 @@ const Menu: React.FC<MenuProps> = ({ onNavigate }) => {
             </button>
             {isOpen && (
                 <div className="menu-items">
-                    <button onClick={() => handleClick('home')}>Home</button>
-                    <button onClick={() => handleClick('about')}>About</button>
-                    <button onClick={() => handleClick('portfolio')}>Portfolio</button>
+                    <Link to="/" onClick={handleClose}>Home</Link>
+                    <Link to="/about" onClick={handleClose}>About</Link>
+                    <Link to="/portfolio" onClick={handleClose}>Portfolio</Link>
                 </div>
             )}
         </div>

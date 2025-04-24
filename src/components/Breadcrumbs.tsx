@@ -1,20 +1,20 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Breadcrumbs.css';
 
 interface BreadcrumbsProps {
     currentPage: string;
     selectedProject?: string | null;
-    onNavigate: (page: string) => void;
 }
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentPage, selectedProject, onNavigate }) => {
+const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentPage, selectedProject }) => {
     return (
         <nav className="breadcrumbs">
             <ol>
                 <li>
-                    <button onClick={() => onNavigate('home')} className="breadcrumb-link">
+                    <Link to="/" className="breadcrumb-link">
                         Home
-                    </button>
+                    </Link>
                 </li>
                 {currentPage === 'about' && (
                     <li>
@@ -27,9 +27,9 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ currentPage, selectedProject,
                         <span className="separator">/</span>
                         {selectedProject ? (
                             <>
-                                <button onClick={() => onNavigate('portfolio')} className="breadcrumb-link">
+                                <Link to="/portfolio" className="breadcrumb-link">
                                     Portfolio
-                                </button>
+                                </Link>
                                 <span className="separator">/</span>
                                 <span className="current">{selectedProject}</span>
                             </>

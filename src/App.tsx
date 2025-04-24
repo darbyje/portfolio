@@ -8,6 +8,7 @@ import ProjectArticle from './components/ProjectArticle';
 import Breadcrumbs from './components/Breadcrumbs';
 import Home from './components/Home';
 import About from './components/About';
+import usePageTracking from './hooks/usePageTracking';
 
 interface Project {
   title: string;
@@ -25,10 +26,7 @@ interface Project {
 function AppContent() {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const handleNavigate = (page: string) => {
-    navigate('/' + page);
-  };
+  usePageTracking();
 
   const handleProjectSelect = (project: Project) => {
     navigate(`/portfolio/${encodeURIComponent(project.title)}`, { state: { project } });
@@ -59,7 +57,7 @@ function AppContent() {
 
   return (
     <div className="App">
-      <Menu onNavigate={handleNavigate} />
+      <Menu />
       <Header
         title={getPageTitle()}
         isHomePage={location.pathname === '/'}
@@ -67,11 +65,10 @@ function AppContent() {
       <Breadcrumbs
         currentPage={getCurrentPage()}
         selectedProject={location.state?.project?.title || null}
-        onNavigate={handleNavigate}
       />
       <main>
         <Routes>
-          <Route path="/" element={<Home onNavigate={handleNavigate} />} />
+          <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/portfolio" element={<Portfolio onProjectSelect={handleProjectSelect} />} />
           <Route

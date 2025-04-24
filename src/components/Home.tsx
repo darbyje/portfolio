@@ -1,28 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 
-interface HomeProps {
-    onNavigate: (page: string) => void;
-}
-
-const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+const Home: React.FC = () => {
     return (
         <div className="home">
             <div className="home-content">
                 <h1>Welcome to My Portfolio</h1>
                 <div className="navigation-links">
-                    <button
+                    <Link
+                        to="/about"
                         className="nav-button"
-                        onClick={() => onNavigate('about')}
                     >
                         About Me
-                    </button>
-                    <button
+                    </Link>
+                    <Link
+                        to="/portfolio"
                         className="nav-button"
-                        onClick={() => onNavigate('portfolio')}
                     >
                         View My Work
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>
