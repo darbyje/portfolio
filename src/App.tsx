@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Menu from './components/Menu';
@@ -21,59 +22,79 @@ interface Project {
   solutions: string[];
 }
 
-function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+function AppContent() {
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleNavigate = (page: string) => {
-    setCurrentPage(page);
-    setSelectedProject(null);
+    navigate('/' + page);
   };
 
   const handleProjectSelect = (project: Project) => {
-    setSelectedProject(project);
+    navigate(`/portfolio/${encodeURIComponent(project.title)}`, { state: { project } });
   };
 
   const getPageTitle = () => {
-    if (selectedProject) {
-      return selectedProject.title;
+    const project = location.state?.project as Project | undefined;
+    if (project) {
+      return project.title;
     }
-    switch (currentPage) {
-      case 'home':
+    switch (location.pathname) {
+      case '/':
         return 'Welcome';
-      case 'about':
+      case '/about':
         return 'Jeff Darby';
-      case 'portfolio':
+      case '/portfolio':
         return 'Portfolio';
       default:
         return 'Welcome';
     }
   };
 
+  const getCurrentPage = () => {
+    const path = location.pathname;
+    if (path === '/') return 'home';
+    return path.split('/')[1] || 'home';
+  };
+
   return (
     <div className="App">
-      <Menu onNavigate={setCurrentPage} />
+      <Menu onNavigate={handleNavigate} />
       <Header
         title={getPageTitle()}
-        isHomePage={currentPage === 'home'}
+        isHomePage={location.pathname === '/'}
       />
       <Breadcrumbs
-        currentPage={currentPage}
-        selectedProject={selectedProject?.title || null}
-        onNavigate={setCurrentPage}
+        currentPage={getCurrentPage()}
+        selectedProject={location.state?.project?.title || null}
+        onNavigate={handleNavigate}
       />
       <main>
-        {selectedProject ? (
-          <ProjectArticle project={selectedProject} />
-        ) : currentPage === 'home' ? (
-          <Home onNavigate={handleNavigate} />
-        ) : currentPage === 'about' ? (
-          <About />
-        ) : (
-          <Portfolio onProjectSelect={handleProjectSelect} />
-        )}
+        <Routes>
+          <Route path="/" element={<Home onNavigate={handleNavigate} />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/portfolio" element={<Portfolio onProjectSelect={handleProjectSelect} />} />
+          <Route
+            path="/portfolio/:projectTitle"
+            element={
+              location.state?.project ? (
+                <ProjectArticle project={location.state.project} />
+              ) : (
+                <div>Project not found</div>
+              )
+            }
+          />
+        </Routes>
       </main>
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Router basename="/portfolio">
+      <AppContent />
+    </Router>
   );
 }
 
