@@ -2,12 +2,13 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
-import Menu from './components/Menu';
 import Portfolio from './components/Portfolio';
 import ProjectArticle from './components/ProjectArticle';
 import Breadcrumbs from './components/Breadcrumbs';
 import Home from './components/Home';
 import About from './components/About';
+import Shop from './components/shop/Shop';
+import { CartProvider } from './context/CartContext';
 import usePageTracking from './hooks/usePageTracking';
 
 interface Project {
@@ -44,6 +45,8 @@ function AppContent() {
         return 'Jeff Darby';
       case '/portfolio':
         return 'Portfolio';
+      case '/shop':
+        return 'Digital Products';
       default:
         return 'Welcome';
     }
@@ -57,7 +60,6 @@ function AppContent() {
 
   return (
     <div className="App">
-      <Menu />
       <Header
         title={getPageTitle()}
         isHomePage={location.pathname === '/'}
@@ -71,6 +73,7 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/portfolio" element={<Portfolio onProjectSelect={handleProjectSelect} />} />
+          <Route path="/shop" element={<Shop />} />
           <Route
             path="/portfolio/:projectTitle"
             element={
@@ -89,8 +92,10 @@ function AppContent() {
 
 function App() {
   return (
-    <Router basename="/portfolio">
-      <AppContent />
+    <Router>
+      <CartProvider>
+        <AppContent />
+      </CartProvider>
     </Router>
   );
 }

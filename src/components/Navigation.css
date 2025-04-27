@@ -1,0 +1,36 @@
+.navigation {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Override hamburger menu positioning since it's now part of navigation */
+.hamburger-menu {
+    position: static;
+    top: auto;
+    right: auto;
+}
+
+/* Make cart button match hamburger button size */
+.navigation .cart-button {
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.navigation .cart-icon {
+    font-size: inherit;
+}
+
+/* Adjust cart count badge position */
+.navigation .cart-count {
+    top: -5px;
+    right: -5px;
+}

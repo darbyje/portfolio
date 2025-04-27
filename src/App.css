@@ -19,6 +19,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: margin-right 0.3s ease-in-out;
 }
 
 nav.main-nav {
@@ -42,10 +43,12 @@ nav.main-nav a:hover {
 }
 
 main {
-  padding: 2rem 0;
+  padding: 2rem;
   flex: 1;
   min-height: calc(100vh - 60px);
   background-color: #1a202c;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 @media (max-width: 768px) {
@@ -56,6 +59,10 @@ main {
 
   .skills-list {
     justify-content: center;
+  }
+
+  main {
+    padding: 1rem;
   }
 }
 

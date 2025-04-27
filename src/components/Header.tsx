@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
+import Navigation from './Navigation';
+import Cart from './shop/Cart';
 
 interface HeaderProps {
     title: string;
@@ -7,17 +9,23 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ title, isHomePage = false }) => {
+    const [isCartOpen, setIsCartOpen] = useState(false);
+
     return (
-        <header className={`header ${isHomePage ? 'header-full' : 'header-compact'}`}>
-            <div className="header-content">
-                <h1>{title}</h1>
-                <h2>Software Engineer</h2>
-                <div className="contact-info">
-                    <p>📧 Jeff.Darby@Genesys.com</p>
-                    <p>📍 Hobart Tasmania</p>
+        <>
+            <header className={`header ${isHomePage ? 'header-full' : 'header-compact'}`}>
+                <div className="header-content">
+                    <h1>{title}</h1>
+                    <h2>Software Engineer</h2>
+                    <div className="contact-info">
+                        <p>📧 Jeff.Darby@Genesys.com</p>
+                        <p>📍 Hobart Tasmania</p>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
+            <Navigation onCartClick={() => setIsCartOpen(true)} />
+            <Cart isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
+        </>
     );
 };
 

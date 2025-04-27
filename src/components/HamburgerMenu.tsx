@@ -5,19 +5,21 @@ import './HamburgerMenu.css';
 const HamburgerMenu: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
+    const handleClose = () => {
+        setIsOpen(false);
     };
 
     return (
         <div className="hamburger-menu">
-            <button className="hamburger-button" onClick={toggleMenu}>
+            <button className="hamburger-button" onClick={() => setIsOpen(!isOpen)}>
                 <span className="hamburger-icon">☰</span>
             </button>
             {isOpen && (
                 <nav className="menu-items">
-                    <Link to="/" onClick={() => setIsOpen(false)}>Home</Link>
-                    <Link to="/portfolio" onClick={() => setIsOpen(false)}>Portfolio</Link>
+                    <Link to="/" onClick={handleClose}>Home</Link>
+                    <Link to="/about" onClick={handleClose}>About</Link>
+                    <Link to="/portfolio" onClick={handleClose}>Portfolio</Link>
+                    <Link to="/shop" onClick={handleClose}>Shop</Link>
                 </nav>
             )}
         </div>
