@@ -1,6 +1,6 @@
 import React from 'react';
 import ProductCard from './ProductCard';
-import { mockProducts } from '../../mockData/products';
+import { products } from '../../data/products';
 import { useCart } from '../../context/CartContext';
 import { Product } from '../../types/product';
 import './Shop.css';
@@ -14,9 +14,9 @@ const Shop: React.FC = () => {
 
     return (
         <div className="shop-container">
-            <h1>Digital Products</h1>
+            <h1>Gaming Accessories</h1>
             <div className="products-grid">
-                {mockProducts.map(product => (
+                {products.map(product => (
                     <ProductCard
                         key={product.id}
                         product={product}
